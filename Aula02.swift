@@ -1,111 +1,80 @@
-import Foundation
- 
-//Comentario de uma unica linha
- 
-/*
- 
- Comentario
- de
- varias linhas
- 
- */
- 
-//Criar uma variavel
-var name2: String = "Leandrinho"
-//Por inferencia, nao eh necessario falar qual o tipo da variavel, o swift entende
-var name = "Leandro Coelho de Menezes"
-name = "Leandro"
-print(name)
- 
-var 🐶 = "Pedrinho"
-print(🐶)
- 
- d
-//Criar uma constante
-let favoriteMobileSystem = "iOS"
-print(favoriteMobileSystem)
- 
- 
-//Interpolacao, pegando o valor da variavel em uma String Toda variavel tem uma Description, ou seja, uma String por baixo dos panos
-var idade = 21
-var message = "Nome: \(name) \nidade: \(idade)"
-print(message)
- 
- 
-//Bool, Double, Float, Int, String, Character
- 
- 
-//Inteiros
-var id: Int = 755
-var age: Int8 = 48
- 
-print(age)
- 
- 
-//Booleanos
-var isAtivo: Bool = false
- 
-//String
-var String = "Teste"
- 
-//Caracter
-var gender: Character = "M"
- 
- 
-//Float e Double
-let pi = 3.1415
- 
- 
-var stg = """
-testando
- 
-uma vez
- 
-só
-"""
- 
- 
-print(stg)
- 
- 
-let address = "Rua Botupuca, 232, 018293-292, SP"
-print(address)
- 
- 
-//Usando uma tupla
-let address2 = ("Rua Botupuca", 232, "293023-102", "SP")
-print("Moro no nr \(address2.1)")
- 
-//Nomeando a tupla
-let address3: (rua: String, numero: Int, cep:String, uf:String) = ("Rua Botupuca", 232, "293023-102", "SP")
-print("Moro no nr \(address3.uf)")
- 
- 
-let aluno: (firstName: String, lastName: String, age: Int, course: String, grade: Int) = ("Leandro", "Menezes", 21, "Desenvolvimento de iOS", 10)
- 
-print("Meu nome eh: \(aluno.firstName) tenho \(aluno.age) anos e tirei a nota \(aluno.grade) na materia \(aluno.course) por que estudei muito no carnavel")
- 
-print("**********************************************************************************")
- 
- 
-//Optionals eh o cara que nao precisa ser inicializado em primeiro instante
-var cnh: String? = nil
-cnh = "12312"
- 
-print("Minha cnh eh \(cnh!)")
- 
-//Option Binding
-if let outraVariavel = cnh {
-    print("A minha cnh eh \(outraVariavel)")
-}else {
-    print("Essa pessoa nao tem cnh")
+//: Playground - noun: a place where people can play
+
+import UIKit
+
+// 1 - Criar um Enum Com Tipos de IMC
+enum IMC : String {
+    case Baixo,Medio,Alto
 }
- 
-//Nil Coalescing Operator (Operador de Coalescencia Nula)
-let myCNH: String = cnh ?? "qualquer outra coisa"
- 
-print(cnh)
- 
- 
- 
+
+//2 - Criar um Struct Pessoa
+struct Pessoa{
+    var nome : String
+    var idade : Int
+    var sexo: String
+    var altura : Double
+    var peso : Double
+    var imc : String?
+    
+    mutating func changeImc(newImc : String){
+        imc = newImc
+    }
+}
+
+// 3 - Criar um Metodo Fora da Struct
+func calcImc(altura:Double,peso:Double) ->String{
+    let result =  peso/pow(altura, 2)
+    switch result {
+    case 0 ... 20:
+        return IMC.Baixo.rawValue;
+    default:
+        return IMC.Medio.rawValue;
+    }
+}
+
+// Iniciar o Struct com Valores pre - definidos
+let rodrigo = Pessoa(nome: "Rodrigo", idade: 20, sexo: "Masc", altura: 1.73, peso: 65.0, imc: nil)
+
+print(rodrigo)
+
+// Passar Novos Valores por Copia
+// 4- Interligar Tudo (Struct + Func Externa para Calc do IMC )
+var teste = rodrigo
+teste.nome = "Teste"
+teste.idade = 21
+teste.sexo = "masc"
+teste.altura = 1.73
+teste.peso = 65.0
+teste.changeImc(newImc: calcImc(altura: teste.altura, peso: teste.peso))
+
+print(teste)
+
+
+// 5 - Criando um  Array de Pessoa(Struct)
+var pessoaList : [Pessoa] = []
+
+//Populando pessoaList Preenchendo o IMC por Funcao externa
+var cont = 1
+
+while cont <= 10 {
+    teste.nome = "teste" + cont.description
+    teste.idade = 21
+    teste.sexo = "Masc"
+    teste.altura = Double(arc4random_uniform(100))
+    teste.peso = Double(arc4random_uniform(100))
+    teste.changeImc(newImc: calcImc(altura: teste.altura, peso: teste.peso))
+    pessoaList.append(teste)
+    cont += 1
+}
+
+// Mostrar resultado com imc prenchido
+for pessoa  in pessoaList{
+    print("nome \(pessoa.nome) tem um imc \(pessoa.imc)")
+}
+
+
+
+
+
+
 
