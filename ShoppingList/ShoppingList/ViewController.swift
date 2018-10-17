@@ -11,19 +11,19 @@ import Firebase
 
 class ViewController: UIViewController {
 
+    
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
     @IBOutlet weak var tfName: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     @IBAction func login(_ sender: UIButton) {
         Auth.auth().signIn(withEmail: tfEmail.text!, password: tfPassword.text!) { (result, error) in
             if error == nil {
-                print("Usuário logado com sucesso!")
+                print("Usuário logado com sucesso")
                 self.updateUserAndProceed()
             } else {
                 print(error!.localizedDescription)
@@ -46,12 +46,12 @@ class ViewController: UIViewController {
         if tfName.text!.isEmpty {
             showMainScreen()
         } else {
-            guard let user = Auth.auth().currentUser else { return }
+            guard let user = Auth.auth().currentUser else {return}
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = tfName.text!
             changeRequest.commitChanges { (error) in
                 if error == nil {
-                    print("Nome atribuído com sucesso!")
+                    print("Nome atribuído com sucesso")
                 } else {
                     print(error!.localizedDescription)
                 }
@@ -61,8 +61,19 @@ class ViewController: UIViewController {
     }
     
     func showMainScreen() {
-        guard let mainVC = storyboard?.instantiateViewController(withIdentifier: "TableViewController") else { return }
+        guard let mainVC = storyboard?.instantiateViewController(withIdentifier: "TableViewController") else {return}
         navigationController?.viewControllers = [mainVC]
+        
     }
+    
 }
+
+
+
+
+
+
+
+
+
 

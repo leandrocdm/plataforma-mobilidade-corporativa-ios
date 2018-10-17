@@ -1,13 +1,12 @@
 //
 //  AppDelegate.swift
-//  ShoppingList
+//  Responsivo
 //
-//  Created by Usuário Convidado on 25/08/2018.
+//  Created by Usuário Convidado on 03/08/2018.
 //  Copyright © 2018 FIAP. All rights reserved.
 //
 
 import UIKit
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,16 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        FirebaseApp.configure()
-        
-        if Auth.auth().currentUser != nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainVC = storyboard.instantiateViewController(withIdentifier: "TableViewController")
-            let nc = window?.rootViewController as? UINavigationController
-            nc?.viewControllers = [mainVC]
-        }
-        
+        // Override point for customization after application launch.
         return true
     }
 
